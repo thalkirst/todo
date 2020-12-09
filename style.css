@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.current__day, .current__date {
+    color: white;
+    align-self: start;
+    padding-bottom: 5px;
+    margin-left: 20px;
+}
+
+.pending__items {
+    color: white;
+    align-self: start;
+    margin-left: 48px;
+}
+
+.list__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f44336;
+    width: 500px;
+    margin: auto;
+}
+
+h2 {
+    color: white;
+    padding-top: 40px;
+    font-size: 3rem;
+}
+
+.list__header {
+    padding: 40px 40px;
+    display: inline-flex;
+    justify-content: center;
+    width: 500px;
+    color: white;
+    text-align: center;
+}
+
+.input__field {
+    border: none;
+    border-radius: 0;
+    padding: 15px;
+    font-size: 20px;
+    width: 70%;
+}
+
+.add__button {
+    width: 12%;
+    background: gray;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    font-size: 3rem;
+    margin-left: 15px;
+  }
+
+.list {
+    width: 450px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list__checkbox {
+    height: 18px;
+    width: 18px;
+    display: flex;
+    margin: 0 10px;
+}
+
+
+ul li {
+    cursor: pointer;
+    padding-top: 10px; 
+    padding-bottom: 10px;
+    background: whitesmoke;
+    font-size: 1rem;
+    transition: all 0.5s;
+    opacity: 0;
+    user-select: none;
+    word-wrap: normal;
+    display: flex;
+}
+
+.close__button {    
+    display: flex;
+    text-align: center;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: 10px;
+    background-color: red;
+    color: white;
+    height: 30px;
+    width: 30px;
+    transition: all 1s;
+    opacity: 0;
+}
+
+
+.show {
+    opacity: 1;
+  }
+
+ul li:hover {
+    background: lightskyblue;
+
+}
+
