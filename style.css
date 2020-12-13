@@ -19,6 +19,10 @@ body {
     margin-left: 48px;
 }
 
+.completed__tasks {
+    opacity: 0;
+}
+
 .list__container {
     display: flex;
     flex-direction: column;
@@ -64,6 +68,42 @@ h2 {
     margin-left: 15px;
   }
 
+.buttons {
+    padding: 20px;
+}
+
+.show__button {
+    background: yellow;
+    color:black;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    font-size: 1.2rem;
+    padding: 5px;
+  }
+
+.delete__button {
+    background: blue;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 1.2rem;
+  }
+
+.clear__button {
+    background: red;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 1.2rem;
+  }
+
 .list, .list__completed {
     width: 450px;
     padding: 0;
@@ -73,6 +113,7 @@ h2 {
 .list__completed {
     pointer-events: none;
     text-decoration: line-through;
+    opacity: 0;
 }
 
 .list__checkbox {

@@ -2,8 +2,13 @@
 
 let pendingItems = 0;
 let completedItems = 0;
-const addButton = document.querySelector('.add__button');
-addButton.addEventListener('click', newListItem);
+const showButton = document.querySelector('.show__button');
+document.querySelector('.add__button').addEventListener('click', newListItem);
+document.querySelector('.delete__button').addEventListener('click', deleteAll);
+showButton.addEventListener('click', showComplete);
+document.querySelector('.clear__button').addEventListener('click', clearAll);
+
+
 
 // adding date and day of week to header //
 
@@ -27,7 +32,7 @@ const updatePending = () => {
         pending.textContent = `Relax! You have nothing to do now.`
     }
     else {
-        pending.textContent = `You have ${pendingItems} pending item(s).`
+        pending.textContent = `You have ${pendingItems} pending tasks(s).`
     }
 }
 updatePending();
@@ -36,11 +41,7 @@ updatePending();
 
 const updateCompleted = () => {
     const completed = document.querySelector('.completed__tasks');
-    if (completedItems === 0) {
-    }
-    else {
-        completed.textContent = `You have ${completedItems} completed item(s).`
-    }
+    completed.textContent = `You have ${completedItems} completed tasks(s).`
 }
 updateCompleted();
 
@@ -84,7 +85,7 @@ function addCompletedItem(li) {
     completedItems++;
     updateCompleted();
     document.querySelector(".list__completed").appendChild(li);
-}   
+}
 
 
 // adding event listeners to list items //
@@ -128,5 +129,42 @@ function newListItem() {
     updatePending();
 
     document.querySelector(".input__field").value = "";
+}
+
+function deleteAll() {
+    const list1 = document.querySelector(".list");
+    while (list1.firstChild) {
+        list1.removeChild(list1.lastChild);
+    }
+    pendingItems = 0;
+    updatePending();
+
+}
+
+function clearAll() {
+    deleteAll();
+    const list1 = document.querySelector(".list__completed");
+    while (list1.firstChild) {
+        list1.removeChild(list1.lastChild);
+    }
+    completedItems = 0;
+    showComplete();
+    
+}
+
+function showComplete() {
+    const completed = document.querySelector('.completed__tasks');
+    const list = document.querySelector(".list__completed");
+    if (showButton.textContent === 'Show Complete') {
+        if (completedItems > 0) {
+            completed.classList.add('show');
+            list.classList.add('show');
+            showButton.textContent = 'Hide Complete';
+        }
+    } else {
+        completed.classList.remove('show');
+        list.classList.remove('show');
+        showButton.textContent = 'Show Complete';
+    }
 }
 
