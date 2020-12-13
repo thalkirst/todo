@@ -8,8 +8,6 @@ document.querySelector('.delete__button').addEventListener('click', deleteAll);
 showButton.addEventListener('click', showComplete);
 document.querySelector('.clear__button').addEventListener('click', clearAll);
 
-
-
 // adding date and day of week to header //
 
 const addDate = () => {
@@ -35,7 +33,7 @@ const updatePending = () => {
         pending.textContent = `You have ${pendingItems} pending tasks(s).`
     }
 }
-updatePending();
+
 
 // function to keep track and display the number of completed tasks //
 
@@ -43,7 +41,36 @@ const updateCompleted = () => {
     const completed = document.querySelector('.completed__tasks');
     completed.textContent = `You have ${completedItems} completed tasks(s).`
 }
-updateCompleted();
+
+// check storage and add items if necessary
+
+const checkStorage = () => {
+    let tasks = [];
+    Object.keys(localStorage).forEach(function(key) {
+        tasks.push(key);
+     });
+    if (tasks !== []) {
+        for (let i=0; i<tasks.length; i++) {
+            const li = document.createElement("li");
+            const checkBox = document.createElement("input");
+            const closeButton = document.createElement("i");
+            const text = document.createElement('span');
+            text.textContent = tasks[i];
+            text.classList.add('list__text');
+            checkBox.type = 'checkbox';
+            checkBox.classList.add('list__checkbox');
+            closeButton.classList.add('close__button', 'fa', 'fa-trash');
+            itemGenerator(li, checkBox, text, closeButton);
+            listenerGenerator(li, checkBox, text, closeButton);
+            pendingItems++
+            updatePending();
+        }
+    }
+    updatePending();
+}
+
+checkStorage();
+
 
 // todo list item text generator //
 
@@ -68,13 +95,30 @@ function itemGenerator(li, checkBox, text, closeButton) {
     setTimeout(function () {
         li.classList.add("show");
     }, 10);
+    localStorage.setItem(text.textContent, text);
 }
+
+// prevent the creation of completely identical tasks //
+
+function notDuplicate(text) {
+    const list = document.querySelector(".list").children;
+    for (let i = 0; i < list.length; i++) {
+        if (text.textContent === (list[i].children[1]).textContent) {
+            document.querySelector(".error").textContent = 'Identical tasks are not allowed'
+            return false;
+        }
+    }
+    return true;
+}
+
 
 // remove a todo list item //
 
-function removeItem(li) {
+function removeItem(li, text) {
+    document.querySelector(".error").textContent = ''
     li.removeChild(li.lastChild);
     document.querySelector(".list").removeChild(li);
+    localStorage.removeItem(text.textContent);
     pendingItems = pendingItems - 1;
     updatePending();
 }
@@ -90,7 +134,7 @@ function addCompletedItem(li) {
 
 // adding event listeners to list items //
 
-function listenerGenerator(li, checkBox, closeButton) {
+function listenerGenerator(li, checkBox, text, closeButton) {
 
     li.addEventListener('mouseover', () => {
         closeButton.classList.add('show');
@@ -100,11 +144,11 @@ function listenerGenerator(li, checkBox, closeButton) {
     });
 
     closeButton.addEventListener('click', () => {
-        removeItem(li);
+        removeItem(li, text);
     });
 
     checkBox.addEventListener('click', () => {
-        removeItem(li);
+        removeItem(li, text);
         addCompletedItem(li);
     });
 
@@ -121,25 +165,32 @@ function newListItem() {
     checkBox.classList.add('list__checkbox');
     closeButton.classList.add('close__button', 'fa', 'fa-trash');
     let text = textGenerator();
+    document.querySelector(".error").textContent = ''
+    if (notDuplicate(text)) {
+        itemGenerator(li, checkBox, text, closeButton);
+        listenerGenerator(li, checkBox, text, closeButton);
 
-    itemGenerator(li, checkBox, text, closeButton);
-    listenerGenerator(li, checkBox, closeButton);
-
-    pendingItems++
-    updatePending();
-
+        pendingItems++
+        updatePending();
+    }
     document.querySelector(".input__field").value = "";
 }
 
+// delete all incomplete items //
+
 function deleteAll() {
+    document.querySelector(".error").textContent = ''
     const list1 = document.querySelector(".list");
     while (list1.firstChild) {
         list1.removeChild(list1.lastChild);
     }
+    localStorage.clear();
     pendingItems = 0;
     updatePending();
 
 }
+
+// delete every item and reset show/hide button //
 
 function clearAll() {
     deleteAll();
@@ -149,8 +200,10 @@ function clearAll() {
     }
     completedItems = 0;
     showComplete();
-    
+
 }
+
+// show/hide button functionality ///
 
 function showComplete() {
     const completed = document.querySelector('.completed__tasks');
@@ -167,4 +220,5 @@ function showComplete() {
         showButton.textContent = 'Show Complete';
     }
 }
+
 

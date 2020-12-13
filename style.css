@@ -19,6 +19,12 @@ body {
     margin-left: 48px;
 }
 
+.error {
+    color: yellow;
+    margin-left: 48px;
+    margin-bottom: 10px;
+}
+
 .completed__tasks {
     opacity: 0;
 }
@@ -35,22 +41,20 @@ body {
 
 h2 {
     color: white;
-    padding-top: 40px;
     font-size: 3rem;
 }
 
 .list__header {
-    padding: 40px 40px;
+    padding-top: 20px;
+    padding-bottom: 10px;
     display: inline-flex;
     justify-content: center;
     width: 500px;
-    color: white;
     text-align: center;
 }
 
 .input__field {
     border: none;
-    border-radius: 0;
     padding: 15px;
     font-size: 20px;
     width: 70%;
@@ -60,7 +64,6 @@ h2 {
     width: 12%;
     background: gray;
     color:white;
-    text-align: center;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 0;
@@ -121,9 +124,7 @@ h2 {
     width: 18px;
     display: flex;
     margin: 0 10px;
-    flex: 5%;
 }
-
 
 ul li {
     cursor: pointer;
@@ -134,12 +135,10 @@ ul li {
     transition: all 0.5s;
     opacity: 0;
     user-select: none;
-    word-wrap: normal;
     display: flex;
 }
 
 .close__button {    
-    display: flex;
     text-align: center;
     padding-top: 10px;
     background-color: red;
@@ -149,6 +148,7 @@ ul li {
     transition: all 1s;
     opacity: 0;
     flex: 10%;
+    margin-right: 10px;
     
 }
 
