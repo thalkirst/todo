@@ -64,7 +64,7 @@ h2 {
     margin-left: 15px;
   }
 
-.list {
+.list, .list__completed {
     width: 450px;
     padding: 0;
     list-style-type: none;
@@ -75,6 +75,7 @@ h2 {
     width: 18px;
     display: flex;
     margin: 0 10px;
+    flex: 5%;
 }
 
 
@@ -95,16 +96,19 @@ ul li {
     display: flex;
     text-align: center;
     padding-top: 10px;
-    margin-left: auto;
-    margin-right: 10px;
     background-color: red;
     color: white;
     height: 30px;
     width: 30px;
     transition: all 1s;
     opacity: 0;
+    flex: 10%;
+    
 }
 
+.list__text {
+    flex: 80%;
+}
 
 .show {
     opacity: 1;

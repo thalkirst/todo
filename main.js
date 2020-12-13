@@ -6,12 +6,12 @@ const addDate = () => {
     let date = today.toLocaleDateString('en-US');
     dayDisplayed.textContent = weekday;
     dateDisplayed.textContent = date;
-
 }
 
 addDate()
 
 let pendingItems = 0;
+let completedItems = 0;
 
 const updatePending = () => {
     const pending = document.querySelector('.pending__items');
@@ -39,7 +39,9 @@ function newListItem() {
     if (inputValue === '') {
         inputValue = document.querySelector(".input__field").placeholder;
     }
-    const text = document.createTextNode(inputValue);
+    const text = document.createElement('span');
+    text.textContent = inputValue;
+    text.classList.add('list__text');
     li.appendChild(checkBox);
     li.appendChild(text);
     li.appendChild(closeButton);
