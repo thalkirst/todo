@@ -13,7 +13,7 @@ body {
     margin-left: 20px;
 }
 
-.pending__items {
+.pending__items, .completed__tasks {
     color: white;
     align-self: start;
     margin-left: 48px;
@@ -68,6 +68,11 @@ h2 {
     width: 450px;
     padding: 0;
     list-style-type: none;
+}
+
+.list__completed {
+    pointer-events: none;
+    text-decoration: line-through;
 }
 
 .list__checkbox {
